@@ -35,7 +35,7 @@
 ;configVisible=true
 ;configLeft=-1
 ;configTop=-1
-;configThumbnail=true
+;configThumbnail=false
 ;configThumbnailQuality=middle
 ;configSaveSlotNum=5
 ;configSaveOverwrite=false
