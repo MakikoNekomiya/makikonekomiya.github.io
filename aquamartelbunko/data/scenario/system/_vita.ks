@@ -1,0 +1,5 @@
+[preload  storage="./data/bgimage/図書館内.jpg"  ]
+[preload  storage="./data/fgimage/chara/3/ウィータ　仮　疑う.png"  ]
+[preload  storage="./data/bgimage/ウィータ背景.jpg"  ]
+[preload  storage="./data/fgimage/chara/3/ウィータ　仮　背景透過.png"  ]
+[return]

@@ -1,0 +1,6 @@
+[preload  storage="./data/bgimage/図書館内.jpg"  ]
+[preload  storage="./data/fgimage/chara/4/アモル　仮　笑う　2.png"  ]
+[preload  storage="./data/fgimage/chara/4/アモル　仮　懐かしむ.png"  ]
+[preload  storage="./data/fgimage/chara/4/アモル　仮　2.png"  ]
+[preload  storage="./data/bgimage/アモル背景.jpg"  ]
+[return]

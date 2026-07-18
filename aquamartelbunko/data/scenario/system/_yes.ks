@@ -1,0 +1,5 @@
+[preload  storage="./data/fgimage/chara/2/アルマ　仮　笑う.png"  ]
+[preload  storage="./data/fgimage/chara/2/アルマ　仮　背景透過.png"  ]
+[preload  storage="./data/bgimage/研究室.jpg"  ]
+[preload  storage="./data/bgimage/normal.jpg"  ]
+[return]

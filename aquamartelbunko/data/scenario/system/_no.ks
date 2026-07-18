@@ -1,0 +1,5 @@
+[preload  storage="./data/bgimage/病院.jpg"  ]
+[preload  storage="./data/bgimage/true.jpg"  ]
+[preload  storage="./data/fgimage/chara/1/ローナ　仮　笑う　2.png"  ]
+[preload  storage="./data/bgimage/bad.jpg"  ]
+[return]

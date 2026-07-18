@@ -1,0 +1,5 @@
+[preload  storage="./data/bgimage/図書館内.jpg"  ]
+[preload  storage="./data/fgimage/chara/7/フェーリー　仮　笑う.png"  ]
+[preload  storage="./data/fgimage/chara/7/フェーリー　仮　2.png"  ]
+[preload  storage="./data/bgimage/フェーリー背景.jpg"  ]
+[return]
