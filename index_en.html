@@ -51,27 +51,69 @@
             object-fit: cover;
             display: block;
         }
-        .instagram-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px 8px;
+        .instagram-carousel {
+            position: relative;
         }
-        .instagram-grid__item {
+        .instagram-carousel__controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .instagram-carousel__button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #2d3748;
+            border-radius: 50%;
+            background: rgba(17, 28, 36, 0.9);
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .instagram-carousel__button:hover {
+            background: #2d3748;
+            transform: translateY(-1px);
+        }
+        .instagram-carousel__track {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 4px 0 8px;
+            scroll-behavior: smooth;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        .instagram-carousel__track::-webkit-scrollbar {
+            display: none;
+        }
+        .instagram-carousel__track.dragging {
+            cursor: grabbing;
+            user-select: none;
+        }
+        .instagram-carousel__item {
+            flex: 0 0 calc((100% - 24px) / 3);
+            min-width: 220px;
             display: flex;
             flex-direction: column;
             gap: 8px;
             color: #e2e8f0;
             text-decoration: none;
+            scroll-snap-align: start;
         }
-        .instagram-grid__image {
+        .instagram-carousel__image {
             display: block;
             width: 100%;
-            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: contain;
             border-radius: 12px;
             background-color: #0d141b;
-            object-fit: contain;
         }
-        .instagram-grid__title {
+        .instagram-carousel__title {
             display: block;
             color: #e2e8f0;
             font-size: 0.8rem;
@@ -81,6 +123,16 @@
         .instagram-embed__caption {
             color: #cbd5e0;
             margin-top: 18px;
+        }
+        @media (max-width: 700px) {
+            .instagram-carousel__item {
+                flex-basis: calc((100% - 12px) / 2);
+            }
+        }
+        @media (max-width: 520px) {
+            .instagram-carousel__item {
+                flex-basis: 85%;
+            }
         }
         .language-switch {
             position: absolute;
@@ -178,31 +230,37 @@ Even after tens of thousands of years, humans still build societies remarkably s
                 <div class="box mb-6 instagram-embed">
                     <h2 class="title is-4">Artwork Gallery</h2>
                     <p class="instagram-embed__caption">The latest works are published on Instagram. You can view theposts there.</p> 
-                    <div class="instagram-grid">
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/kanpai.jpg" alt="Cheers">
-                            <span class="instagram-grid__title">Cheers</span>
-                        </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/orca.jpg" alt="The Beautiful, the Noble, and the Savage">
-                            <span class="instagram-grid__title">The Beautiful, the Noble, and the Savage</span>
-                        </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/blueblood2.jpg" alt="Blue Blood — The Flawless King">
-                            <span class="instagram-grid__title">Blue Blood — The Flawless King</span>
-                        </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/demenigisu.JPG" alt="Keep Looking Up">
-                            <span class="instagram-grid__title">Keep Looking Up</span>
-                        </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/blueblood.jpg" alt="Blue Blood">
-                            <span class="instagram-grid__title">Blue Blood</span>
-                        </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
-                            <img class="instagram-grid__image" src="images/demeko.jpg" alt="Demeko">
-                            <span class="instagram-grid__title">Demeko</span>
-                        </a>
+                    <div class="instagram-carousel">
+                        <div class="instagram-carousel__controls">
+                            <button type="button" class="instagram-carousel__button instagram-carousel__button--prev" aria-label="Previous artworks">‹</button>
+                            <button type="button" class="instagram-carousel__button instagram-carousel__button--next" aria-label="Next artworks">›</button>
+                        </div>
+                        <div class="instagram-carousel__track" aria-label="Artwork gallery">
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/kanpai.jpg" alt="Cheers">
+                                <span class="instagram-carousel__title">Cheers</span>
+                            </a>
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/orca.jpg" alt="The Beautiful, the Noble, and the Savage">
+                                <span class="instagram-carousel__title">The Beautiful, the Noble, and the Savage</span>
+                            </a>
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/blueblood2.jpg" alt="Blue Blood — The Flawless King">
+                                <span class="instagram-carousel__title">Blue Blood — The Flawless King</span>
+                            </a>
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/demenigisu.JPG" alt="Keep Looking Up">
+                                <span class="instagram-carousel__title">Keep Looking Up</span>
+                            </a>
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/blueblood.jpg" alt="Blue Blood">
+                                <span class="instagram-carousel__title">Blue Blood</span>
+                            </a>
+                            <a class="instagram-carousel__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                                <img class="instagram-carousel__image" src="images/demeko.jpg" alt="Demeko">
+                                <span class="instagram-carousel__title">Demeko</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -218,5 +276,58 @@ Even after tens of thousands of years, humans still build societies remarkably s
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.instagram-carousel').forEach((carousel) => {
+            const track = carousel.querySelector('.instagram-carousel__track');
+            const prevButton = carousel.querySelector('.instagram-carousel__button--prev');
+            const nextButton = carousel.querySelector('.instagram-carousel__button--next');
+
+            const getScrollAmount = () => {
+                const item = track.querySelector('.instagram-carousel__item');
+                if (!item) return 0;
+                const styles = window.getComputedStyle(track);
+                const gap = parseFloat(styles.gap || styles.columnGap || '12');
+                return item.getBoundingClientRect().width + gap;
+            };
+
+            const scrollByAmount = (direction) => {
+                track.scrollBy({
+                    left: getScrollAmount() * direction,
+                    behavior: 'smooth'
+                });
+            };
+
+            prevButton.addEventListener('click', () => scrollByAmount(-1));
+            nextButton.addEventListener('click', () => scrollByAmount(1));
+
+            let isDragging = false;
+            let startX = 0;
+            let startScrollLeft = 0;
+
+            const stopDragging = () => {
+                isDragging = false;
+                track.classList.remove('dragging');
+            };
+
+            track.addEventListener('pointerdown', (event) => {
+                isDragging = true;
+                track.classList.add('dragging');
+                startX = event.clientX;
+                startScrollLeft = track.scrollLeft;
+                track.setPointerCapture(event.pointerId);
+            });
+
+            track.addEventListener('pointermove', (event) => {
+                if (!isDragging) return;
+                const walk = event.clientX - startX;
+                track.scrollLeft = startScrollLeft - walk;
+            });
+
+            track.addEventListener('pointerup', stopDragging);
+            track.addEventListener('pointerleave', stopDragging);
+            track.addEventListener('pointercancel', stopDragging);
+        });
+    </script>
 </body>
 </html>
