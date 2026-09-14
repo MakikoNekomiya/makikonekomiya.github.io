@@ -56,32 +56,30 @@
         .instagram-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 8px;
+            gap: 16px 8px;
         }
         .instagram-grid__item {
-            position: relative;
-            padding-top: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #e2e8f0;
             text-decoration: none;
         }
-        .instagram-grid__overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 12px;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
-            color: white;
-            font-size: 0.85rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
+        .instagram-grid__image {
+            display: block;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
         }
-        .instagram-grid__item:hover .instagram-grid__overlay {
-            opacity: 1;
+        .instagram-grid__title {
+            display: block;
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            text-align: center;
+            line-height: 1.5;
         }
         .instagram-embed__caption {
             color: #cbd5e0;
@@ -192,23 +190,29 @@
                     <h2 class="title is-4">Artwork Gallery</h2>
                     <p class="instagram-embed__caption">最新の作品はInstagramで公開中です。こちらからInstagramの投稿に移動できます。</p>
                     <div class="instagram-grid">
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/demeko.jpg');">
-                            <div class="instagram-grid__overlay">デメコ</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/demeko.jpg');"></span>
+                            <span class="instagram-grid__title">デメコ</span>
                         </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/blueblood.jpg');">
-                            <div class="instagram-grid__overlay">ブルー・ブラッド</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/blueblood.jpg');"></span>
+                            <span class="instagram-grid__title">ブルー・ブラッド</span>
                         </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/demenigisu.JPG');">
-                            <div class="instagram-grid__overlay">上を見続けろ</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/demenigisu.JPG');"></span>
+                            <span class="instagram-grid__title">上を見続けろ</span>
                         </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/blueblood2.jpg');">
-                            <div class="instagram-grid__overlay">ブルー・ブラッド〜非の打ち所がない王〜</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/blueblood2.jpg');"></span>
+                            <span class="instagram-grid__title">ブルー・ブラッド〜非の打ち所がない王〜</span>
                         </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/orca.jpg');">
-                            <div class="instagram-grid__overlay">美しく、気高く、凶暴な者たち</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/orca.jpg');"></span>
+                            <span class="instagram-grid__title">美しく、気高く、凶暴な者たち</span>
                         </a>
-                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer" style="background-image: url('images/kanpai.jpg');">
-                            <div class="instagram-grid__overlay">乾杯</div>
+                        <a class="instagram-grid__item" href="https://www.instagram.com/makiko_nekomiya/" target="_blank" rel="noopener noreferrer">
+                            <span class="instagram-grid__image" style="background-image: url('images/kanpai.jpg');"></span>
+                            <span class="instagram-grid__title">乾杯</span>
                         </a>
                     </div>
                 </div>
