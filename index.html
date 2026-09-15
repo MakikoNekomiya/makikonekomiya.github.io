@@ -81,6 +81,11 @@
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
             transform: translateY(-1px);
         }
+        .instagram-carousel__button.is-disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
         .instagram-carousel__track {
             display: flex;
             gap: 14px;
@@ -308,11 +313,34 @@
                 return item.getBoundingClientRect().width + gap;
             };
 
+            const updateButtons = () => {
+                const maxScrollLeft = Math.max(track.scrollWidth - track.clientWidth, 0);
+                const atStart = track.scrollLeft <= 1;
+                const atEnd = track.scrollLeft >= maxScrollLeft - 1;
+
+                prevButton.classList.toggle('is-disabled', atStart);
+                nextButton.classList.toggle('is-disabled', atEnd);
+                prevButton.disabled = atStart;
+                nextButton.disabled = atEnd;
+            };
+
             const scrollByAmount = (direction) => {
-                track.scrollBy({
-                    left: getScrollAmount() * direction,
+                const maxScrollLeft = Math.max(track.scrollWidth - track.clientWidth, 0);
+                const nextScrollLeft = Math.min(
+                    Math.max(track.scrollLeft + getScrollAmount() * direction, 0),
+                    maxScrollLeft
+                );
+
+                if (nextScrollLeft === track.scrollLeft) {
+                    updateButtons();
+                    return;
+                }
+
+                track.scrollTo({
+                    left: nextScrollLeft,
                     behavior: 'smooth'
                 });
+                updateButtons();
             };
 
             prevButton.addEventListener('click', () => scrollByAmount(-1));
@@ -321,14 +349,24 @@
             let isDragging = false;
             let startX = 0;
             let startScrollLeft = 0;
+            let pointerMoved = false;
 
             const stopDragging = () => {
                 isDragging = false;
                 track.classList.remove('dragging');
+                if (pointerMoved) {
+                    track.dataset.swiping = 'true';
+                }
+                setTimeout(() => {
+                    track.dataset.swiping = 'false';
+                    pointerMoved = false;
+                }, 0);
             };
 
             track.addEventListener('pointerdown', (event) => {
                 isDragging = true;
+                pointerMoved = false;
+                track.dataset.swiping = 'false';
                 track.classList.add('dragging');
                 startX = event.clientX;
                 startScrollLeft = track.scrollLeft;
@@ -337,13 +375,27 @@
 
             track.addEventListener('pointermove', (event) => {
                 if (!isDragging) return;
-                const walk = event.clientX - startX;
-                track.scrollLeft = startScrollLeft - walk;
+                const walk = Math.abs(event.clientX - startX);
+                if (walk > 8) {
+                    pointerMoved = true;
+                    event.preventDefault();
+                }
+                const delta = event.clientX - startX;
+                track.scrollLeft = startScrollLeft - delta;
+                updateButtons();
             });
 
             track.addEventListener('pointerup', stopDragging);
             track.addEventListener('pointerleave', stopDragging);
             track.addEventListener('pointercancel', stopDragging);
+            track.addEventListener('click', (event) => {
+                if (track.dataset.swiping === 'true') {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            }, true);
+            track.addEventListener('scroll', updateButtons, { passive: true });
+            updateButtons();
         });
     </script>
 
