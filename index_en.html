@@ -333,54 +333,6 @@ Even after tens of thousands of years, humans still build societies remarkably s
             prevButton.addEventListener('click', () => scrollByAmount(-1));
             nextButton.addEventListener('click', () => scrollByAmount(1));
 
-            let isDragging = false;
-            let startX = 0;
-            let startScrollLeft = 0;
-            let pointerMoved = false;
-
-            const stopDragging = () => {
-                isDragging = false;
-                track.classList.remove('dragging');
-                if (pointerMoved) {
-                    track.dataset.swiping = 'true';
-                }
-                setTimeout(() => {
-                    track.dataset.swiping = 'false';
-                    pointerMoved = false;
-                }, 0);
-            };
-
-            track.addEventListener('pointerdown', (event) => {
-                isDragging = true;
-                pointerMoved = false;
-                track.dataset.swiping = 'false';
-                track.classList.add('dragging');
-                startX = event.clientX;
-                startScrollLeft = track.scrollLeft;
-                track.setPointerCapture(event.pointerId);
-            });
-
-            track.addEventListener('pointermove', (event) => {
-                if (!isDragging) return;
-                const walk = Math.abs(event.clientX - startX);
-                if (walk > 8) {
-                    pointerMoved = true;
-                    event.preventDefault();
-                }
-                const delta = event.clientX - startX;
-                track.scrollLeft = startScrollLeft - delta;
-                updateButtons();
-            });
-
-            track.addEventListener('pointerup', stopDragging);
-            track.addEventListener('pointerleave', stopDragging);
-            track.addEventListener('pointercancel', stopDragging);
-            track.addEventListener('click', (event) => {
-                if (track.dataset.swiping === 'true') {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-            }, true);
             track.addEventListener('scroll', updateButtons, { passive: true });
             updateButtons();
         });
